@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  keycloak:
+    image: aryadi/keycloak:14.0.0 
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_LOGLEVEL: INFO
+      DB_VENDOR: postgres
+      DB_ADDR: 10.104.0.4
+      DB_DATABASE: keycloak
+      DB_USER: keycloakuser
+      DB_PASSWORD: Password
+      PROXY_ADDRESS_FORWARDING: 'true'
+      JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
+      JGROUPS_DISCOVERY_PROPERTIES: datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500
+      
+    ports:
+     - 8080:8080
+    networks:
+     - default
+    logging:
+      driver: json-file
+    deploy:
+      mode: replicated
+      replicas: 2
+      placement:
+         max_replicas_per_node: 1
+      resources:
+        limits:
+            cpus: '1.50'
+            memory: 1024M
+        reservations:
+            cpus: '0.05'
+            memory: 512M
+
+networks:
+  default:
+    driver: overlay
