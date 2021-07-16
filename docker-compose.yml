@@ -31,7 +31,7 @@ services:
             cpus: '1.50'
             memory: 1024M
         reservations:
-            cpus: '0.05'
+            cpus: '0.5'
             memory: 512M
 
 networks:
