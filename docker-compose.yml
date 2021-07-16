@@ -8,15 +8,15 @@ services:
       KEYCLOAK_LOGLEVEL: INFO
       DB_VENDOR: postgres
       DB_ADDR: 10.104.0.4
-      DB_DATABASE: keycloak
-      DB_USER: keycloakuser
-      DB_PASSWORD: Password
+      DB_DATABASE: keycloak_docker
+      DB_USER: keycloak_docker
+      DB_PASSWORD: keycloak_docker
       PROXY_ADDRESS_FORWARDING: 'true'
       JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
       JGROUPS_DISCOVERY_PROPERTIES: datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500
       
     ports:
-     - 8080:8080
+     - 8181:8080
     networks:
      - default
     logging:
